@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import { Flex } from '@chakra-ui/react'
+import Login from './pages/login'
+import Home from './pages/home'
+import Register from './pages/register'
+import { WithAuth, WithoutAuth } from './components/auth'
+import AnimeListPanel from './components/animeList'
+import AddAnimePanel from './components/addAnime'
+import AddCategoryPanel from './components/addNewCategory'
+import CategoryListPanel from './components/categoryList'
 
-function App() {
+export default function MyApp () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      <Route path='/register'
+        element={
+          <WithoutAuth>
+            <Register />
+          </WithoutAuth>
+        }
+      />
+      <Route path='/login'
+        element={
+          <WithoutAuth>
+            <Login />
+          </WithoutAuth>
+        }
+      />
+      <Route path='/'
+        element={
+          <WithAuth>
+            <Home />
+          </WithAuth>
+        }
+      >
+        <Route path='animes' element={ <AnimeListPanel /> } />
+        <Route path='add-anime' element={ <AddAnimePanel /> } />
+        <Route path='add-category' element={ <AddCategoryPanel /> } />
+        <Route path='categories' element={ <CategoryListPanel />} />
+      </Route>
+    </Routes>
+  )
 }
-
-export default App;
