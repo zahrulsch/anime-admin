@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import { Flex } from '@chakra-ui/react'
 import Login from './pages/login'
 import Home from './pages/home'
 import Register from './pages/register'
